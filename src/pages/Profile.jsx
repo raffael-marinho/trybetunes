@@ -1,5 +1,6 @@
 import React from 'react';
+import Header from '../components/Header';
 
 export default function Profile() {
-  return <div data-testid="page-profile">Profile</div>;
+  return <div data-testid="page-profile"><Header /></div>;
 }
