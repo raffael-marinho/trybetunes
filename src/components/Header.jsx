@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getUser } from '../services/userAPI';
+import NavBar from './NavBar';
 
 export default function Header() {
   const [wait, setWait] = useState(false);
@@ -19,6 +20,7 @@ export default function Header() {
     <div data-testid="header-component">
       <h1>Trybe-Tune</h1>
       <h3 data-testid="header-user-name">{name}</h3>
+      <NavBar />
       {wait ? <p>{mensagemLoading}</p> : null}
     </div>
   );
