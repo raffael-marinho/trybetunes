@@ -4,16 +4,22 @@ import { createUser } from '../services/userAPI';
 
 export default function Login() {
   const [name, setName] = useState('');
+
   const [wait, setWait] = useState(false);
+
   const valor3 = 3;
+
   const mensagemLoading = 'Carregando...';
+
   const history = useHistory();
+
   async function loading() {
     setWait(true);
     await createUser({ name });
     setWait(false);
     history.push('/search');
   }
+
   return (
     <div data-testid="page-login">
       <form action="">
