@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { addSong } from '../services/favoriteSongsAPI';
 
 export default function MusicCard(prop) {
-  const { trackName, previewUrl } = prop;
+  const { trackName, previewUrl, trackId, song } = prop;
+
+  const mensagemLoading = 'Carregando...';
+
+  const [wait, setWait] = useState(false);
+
+  async function addFavorite(event) {
+    setWait(true);
+    if (event.target.checked) {
+      await addSong(song);
+    }
+    setWait(false);
+  }
 
   return (
     <div>
@@ -11,6 +24,16 @@ export default function MusicCard(prop) {
         <code>audio</code>
         .
       </audio>
+      <label htmlFor={ trackId }>
+        Favorita
+        <input
+          id={ trackId }
+          type="checkbox"
+          data-testid={ `checkbox-music-${trackId}` }
+          onChange={ (event) => addFavorite(event) }
+        />
+      </label>
+      {wait ? <p>{mensagemLoading}</p> : null}
     </div>
   );
 }

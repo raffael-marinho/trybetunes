@@ -9,33 +9,32 @@ export default function Album() {
 
   const { id } = useParams();
 
-  async function criarAlbum() {
-    const quardarMusica = await getMusics(id);
-    setLista(quardarMusica);
-  }
-
   useEffect(() => {
-    criarAlbum();
-  }, []);
+    async function loading() {
+      const quardarMusica = await getMusics(id);
+      setLista(quardarMusica);
+    }
+    loading();
+  }, [id]);
 
-  console.log(lista);
+  // console.log(lista);
 
   return (
     <div data-testid="page-album">
       <Header />
       <h2 data-testid="album-name">{lista[0]?.collectionName}</h2>
       <p data-testid="artist-name">{lista[0]?.artistName}</p>
-      {lista.map((list, index) => {
-        if (index > 0) {
-          return (
-            <MusicCard
-              key={ index }
-              trackName={ list.trackName }
-              previewUrl={ list.previewUrl }
-            />
-          );
-        }
-      })}
+      {lista.map(
+        (list, index) => index !== 0 && (
+          <MusicCard
+            key={ index }
+            trackName={ list.trackName }
+            previewUrl={ list.previewUrl }
+            trackId={ list.trackId }
+            song={ list }
+          />
+        ),
+      )}
     </div>
   );
 }
