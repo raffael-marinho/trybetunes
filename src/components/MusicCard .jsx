@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { addSong } from '../services/favoriteSongsAPI';
 
 export default function MusicCard(prop) {
-  const { trackName, previewUrl, trackId, song } = prop;
+  const { trackName, previewUrl, trackId, song, checked } = prop;
 
   const mensagemLoading = 'Carregando...';
 
@@ -31,6 +31,7 @@ export default function MusicCard(prop) {
           type="checkbox"
           data-testid={ `checkbox-music-${trackId}` }
           onChange={ (event) => addFavorite(event) }
+          checked={ checked }
         />
       </label>
       {wait ? <p>{mensagemLoading}</p> : null}
